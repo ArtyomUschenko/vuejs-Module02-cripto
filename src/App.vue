@@ -2,11 +2,13 @@
 
 <template>
   <h1>Support</h1>
-  <Input />
+  <Input :changeAmount="changeAmount" />
   <div className="selectors">
-    <Selector />
-    <Selector />
+    <Selector :setInfo="setInfoFirst" />
+    <Selector :setInfo="setInfoSecond" />
   </div>
+  {{ infoFirst }}
+  {{ infoSecond }}
 </template>
 
 <style scoped>
@@ -26,7 +28,26 @@ import Input from "./components/Input.vue"
 import Selector from "./components/Selector.vue"
 
 export default {
-  components: { Input, Selector }
+  components: { Input, Selector },
+  data() {
+    return {
+      amount: 0,
+      infoFirst: "",
+      infoSecond: ""
+    }
+  },
+  methods: {
+    changeAmount(val) {
+      this.amount = val
+    },
+    setInfoFirst(val) {
+      this.infoFirst = val
+    },
+    setInfoSecond(val) {
+      this.infoSecond = val
+    }
+
+  }
 }
 
 </script>

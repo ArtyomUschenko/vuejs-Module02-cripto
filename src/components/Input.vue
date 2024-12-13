@@ -1,6 +1,6 @@
 
 <template>
-  <input type="number" placeholder="Введите номер тикета"></input>
+  <input type="number" @input="changeAmount($event.target.value)" placeholder="Введите номер тикета"></input>
 </template>
 
 <style scoped>
@@ -23,6 +23,11 @@ input {
 
 <script>
 export default {
-
+  props: {
+    changeAmount: {
+      type: Function,
+      required: true
+    }
+  }
 }
 </script>

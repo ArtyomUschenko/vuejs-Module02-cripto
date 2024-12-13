@@ -2,9 +2,9 @@
 
 <template>
  <ul>
-   <li>Система</li>
-   <li>Организация</li>
-   <li>ФИО</li>
+   <li @click="selectItem('Система')" :className="active == 'Система' ? 'active' : ''">Система</li>
+   <li @click="selectItem('Организация')" :className="active == 'Организация' ? 'active' : ''">Организация</li>
+   <li @click="selectItem('ФИО')" :className="active == 'ФИО' ? 'active' : ''">ФИО</li>
  </ul>
 </template>
 
@@ -32,5 +32,23 @@
 
 
 <script>
-
+  export default {
+    props: {
+      setInfo: {
+        type: Function,
+        required: true
+      }
+    },
+    data() {
+      return {
+        active: ""
+      }
+    },
+    methods: {
+      selectItem(val) {
+        this.setInfo(val);
+        this.active = val;
+      }
+    }
+  }
 </script>
