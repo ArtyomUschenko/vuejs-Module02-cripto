@@ -2,13 +2,12 @@
 
 <template>
   <h1>Support</h1>
-  <Input :changeAmount="changeAmount" />
+  <Input :changeAmount="changeAmount" :saveInfo="saveInfo"/>
   <div className="selectors">
     <Selector :setInfo="setInfoFirst" />
     <Selector :setInfo="setInfoSecond" />
   </div>
-  {{ infoFirst }}
-  {{ infoSecond }}
+  <p v-if="error != ''">{{ error }}</p>
 </template>
 
 <style scoped>
@@ -33,7 +32,8 @@ export default {
     return {
       amount: 0,
       infoFirst: "",
-      infoSecond: ""
+      infoSecond: "",
+      error: ""
     }
   },
   methods: {
@@ -45,8 +45,20 @@ export default {
     },
     setInfoSecond(val) {
       this.infoSecond = val
+    },
+    saveInfo() {
+      if(this.amount <=0) {
+        this.error = "Введите значения"
+        return;
+      }else if (this.infoFirst == this.infoSecond) {
+        this.error = "Выберите разные значения"
+        return;
+      }else if (this.infoFirst == '' || this.infoSecond == '') {
+        this.error = "Выберите значения"
+        return;
+      }
+      this.error = ""
     }
-
   }
 }
 

@@ -1,6 +1,7 @@
 
 <template>
-  <input type="number" @input="changeAmount($event.target.value)" placeholder="Введите номер тикета"></input>
+  <input min="0" type="number" @input="changeAmount($event.target.value)" placeholder="Введите номер тикета"></input>
+  <button @click="saveInfo">Добавить</button>
 </template>
 
 <style scoped>
@@ -17,7 +18,18 @@ input {
   color: black;
   outline: none;
 }
-
+button {
+  display: block;
+  position: relative;
+  top: -15px;
+  padding: 15px 20px;
+  color: white;
+  text-transform: uppercase;
+  background-color: black;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 25px;
+}
 
 </style>
 
@@ -25,6 +37,10 @@ input {
 export default {
   props: {
     changeAmount: {
+      type: Function,
+      required: true
+    },
+    saveInfo: {
       type: Function,
       required: true
     }
