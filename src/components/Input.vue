@@ -1,7 +1,8 @@
 
 <template>
   <input min="0" type="number" @input="changeAmount($event.target.value)" placeholder="Введите номер тикета"></input>
-  <button @click="saveInfo">Добавить</button>
+  <button @click="saveInfo()">Добавить</button>
+  <button @click="favourite" className="fav-button">В избранное</button>
 </template>
 
 <style scoped>
@@ -17,9 +18,10 @@ input {
   background-color: #f1f1f1;
   color: black;
   outline: none;
+  display: block;
+  margin: 0 auto;
 }
 button {
-  display: block;
   position: relative;
   top: -15px;
   padding: 15px 20px;
@@ -29,6 +31,9 @@ button {
   margin: 0 auto;
   border: 0;
   border-radius: 25px;
+}
+button.fav-button {
+  margin-left: 10px;
 }
 
 </style>
@@ -43,7 +48,11 @@ export default {
     saveInfo: {
       type: Function,
       required: true
-    }
+    },
+    favourite: {
+      type: Function,
+      required: true
+    },
   }
 }
 </script>

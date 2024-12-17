@@ -2,13 +2,17 @@
 
 <template>
   <h1>Support</h1>
-  <Input :changeAmount="changeAmount" :saveInfo="saveInfo"/>
+  <Input :changeAmount="changeAmount" :saveInfo="saveInfo" :favourite="favourite" />
+  <br>
+  <Favourite :favs="favs" v-if="favs.length > 0" :getFromFavs="getFromFavs" />
   <div className="selectors">
-    <Selector :setInfo="setInfoFirst" />
-    <Selector :setInfo="setInfoSecond" />
+    <Selector :setInfo="setInfoFirst" :infoNow="infoFirst"/>
+    <Selector :setInfo="setInfoSecond" :infoNow="infoSecond"/>
   </div>
+
   <p v-if="error != ''">{{ error }}</p>
   <p v-if="result != '0'" class="result-text">{{ result }}</p>
+
 </template>
 
 <style scoped>
@@ -26,23 +30,37 @@
 <script>
 import Input from "./components/Input.vue"
 import Selector from "./components/Selector.vue"
+import Favourite from "./components/favourite.vue";
 import CryptoConvert from 'crypto-convert'
 
 const convert = new CryptoConvert();
 
 
 export default {
-  components: { Input, Selector },
+  components: { Input, Selector, Favourite },
   data() {
     return {
       amount: 0,
       infoFirst: "",
       infoSecond: "",
       error: "",
-      result: "0"
+      result: "0",
+      favs: []
     }
   },
   methods: {
+    favourite() {
+      this.favs.push(
+          {
+            from: this.infoFirst,
+            to: this.infoSecond,
+      });
+    },
+    getFromFavs(index) {
+      this.infoFirst = this.favs[index].from;
+      this.infoSecond = this.favs[index].to;
+    },
+
     changeAmount(val) {
       this.amount = val
     },

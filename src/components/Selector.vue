@@ -2,9 +2,9 @@
 
 <template>
  <ul>
-   <li @click="selectItem('Система')" :className="active == 'Система' ? 'active' : ''">Система</li>
-   <li @click="selectItem('Организация')" :className="active == 'Организация' ? 'active' : ''">Организация</li>
-   <li @click="selectItem('ФИО')" :className="active == 'ФИО' ? 'active' : ''">ФИО</li>
+   <li @click="setInfo('Система')" :className="infoNow == 'Система' ? 'active' : ''">Система</li>
+   <li @click="setInfo('Организация')" :className="infoNow == 'Организация' ? 'active' : ''">Организация</li>
+   <li @click="setInfo('ФИО')" :className="infoNow== 'ФИО' ? 'active' : ''">ФИО</li>
  </ul>
 </template>
 
@@ -37,18 +37,11 @@
       setInfo: {
         type: Function,
         required: true
+      },
+      infoNow: {
+        type: String,
+        required: true
       }
     },
-    data() {
-      return {
-        active: ""
-      }
-    },
-    methods: {
-      selectItem(val) {
-        this.setInfo(val);
-        this.active = val;
-      }
-    }
   }
 </script>
